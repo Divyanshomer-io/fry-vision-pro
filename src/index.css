@@ -2,95 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* MacFry SensoryVision Suite - Industrial Dark Design System */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core dark industrial palette */
+    --background: 220 20% 7%;
+    --foreground: 210 30% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 18% 10%;
+    --card-foreground: 210 25% 88%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 18% 10%;
+    --popover-foreground: 210 25% 88%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* McCain brand gold */
+    --primary: 42 95% 52%;
+    --primary-foreground: 220 20% 7%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 210 20% 80%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 15% 13%;
+    --muted-foreground: 215 12% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 42 80% 42%;
+    --accent-foreground: 220 20% 7%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 75% 55%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 16%;
+    --input: 220 15% 14%;
+    --ring: 42 95% 52%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Custom tokens */
+    --panel: 220 18% 9%;
+    --panel-border: 220 15% 18%;
+    
+    /* Status colors */
+    --status-pass: 142 70% 45%;
+    --status-warn: 42 95% 52%;
+    --status-fail: 0 75% 55%;
+    --status-critical: 280 70% 55%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Defect colors */
+    --defect-dark: 0 75% 50%;
+    --defect-light: 200 80% 60%;
+    --defect-disease: 280 60% 55%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Data viz */
+    --chart-golden: 42 95% 52%;
+    --chart-green: 142 70% 45%;
+    --chart-red: 0 75% 55%;
+    --chart-blue: 210 80% 60%;
+    --chart-orange: 25 95% 55%;
+    --chart-purple: 280 70% 60%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(42 95% 52%), hsl(35 90% 40%));
+    --gradient-dark: linear-gradient(180deg, hsl(220 20% 10%), hsl(220 20% 6%));
+    --gradient-panel: linear-gradient(135deg, hsl(220 18% 11%), hsl(220 18% 8%));
+    
+    /* Glows */
+    --glow-gold: 0 0 20px hsl(42 95% 52% / 0.3);
+    --glow-green: 0 0 20px hsl(142 70% 45% / 0.3);
+    --glow-red: 0 0 20px hsl(0 75% 55% / 0.3);
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar */
+    --sidebar-background: 220 20% 6%;
+    --sidebar-foreground: 210 25% 75%;
+    --sidebar-primary: 42 95% 52%;
+    --sidebar-primary-foreground: 220 20% 7%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 210 25% 80%;
+    --sidebar-border: 220 15% 14%;
+    --sidebar-ring: 42 95% 52%;
   }
 }
 
@@ -101,5 +92,104 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.03em;
+  }
+
+  code, .mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
+
+@layer components {
+  /* Industrial card */
+  .industrial-card {
+    @apply rounded-lg border;
+    background: var(--gradient-panel);
+    border-color: hsl(var(--panel-border));
+  }
+
+  /* Metric display */
+  .metric-value {
+    font-family: 'JetBrains Mono', monospace;
+    @apply text-2xl font-medium;
+    color: hsl(var(--chart-golden));
+  }
+
+  /* Status badge */
+  .status-pass { color: hsl(var(--status-pass)); }
+  .status-warn { color: hsl(var(--status-warn)); }
+  .status-fail { color: hsl(var(--status-fail)); }
+  .status-critical { color: hsl(var(--status-critical)); }
+
+  /* Scan line animation */
+  .scan-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+    animation: scan 2s linear infinite;
+  }
+
+  /* Defect overlay */
+  .defect-box-dark { border-color: hsl(var(--defect-dark)); box-shadow: 0 0 8px hsl(var(--defect-dark) / 0.6); }
+  .defect-box-light { border-color: hsl(var(--defect-light)); box-shadow: 0 0 8px hsl(var(--defect-light) / 0.6); }
+
+  /* PQI ring animation */
+  .pqi-ring {
+    animation: pqi-pulse 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-gold { color: hsl(var(--primary)); }
+  .bg-panel { background: hsl(var(--panel)); }
+  .border-panel { border-color: hsl(var(--panel-border)); }
+  .glow-gold { box-shadow: var(--glow-gold); }
+  .glow-green { box-shadow: var(--glow-green); }
+  .glow-red { box-shadow: var(--glow-red); }
+  .font-display { font-family: 'Rajdhani', sans-serif; }
+  .font-mono-custom { font-family: 'JetBrains Mono', monospace; }
+}
+
+@keyframes scan {
+  0% { top: -2px; }
+  100% { top: 100%; }
+}
+
+@keyframes pqi-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.8; }
+  97% { opacity: 1; }
+  98% { opacity: 0.9; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 10px hsl(42 95% 52% / 0.3); }
+  50% { box-shadow: 0 0 25px hsl(42 95% 52% / 0.6); }
+}
+
+.animate-flicker { animation: flicker 4s infinite; }
+.animate-pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary) / 0.5); }
