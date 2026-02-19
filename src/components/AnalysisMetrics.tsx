@@ -130,6 +130,46 @@ export function AnalysisMetrics({ result }: AnalysisMetricsProps) {
         />
       </div>
 
+      {/* V2: Shadow + White Balance info */}
+      <div className="rounded-lg px-3 py-2 text-xs space-y-1.5"
+        style={{ background: 'hsl(220 15% 9%)', border: '1px solid hsl(220 15% 16%)' }}>
+        <div className="text-muted-foreground font-display tracking-wider text-xs mb-1">V2 SPATIAL NORMALIZATION</div>
+        <div className="flex justify-between">
+          <span className="text-muted-foreground">Shadow Filtered</span>
+          <span className="font-mono-custom text-gold">{(pixelStats.shadowMaskRatio * 100).toFixed(1)}%</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-muted-foreground">WB Gain R/G/B</span>
+          <span className="font-mono-custom text-xs" style={{ color: 'hsl(210 80% 65%)' }}>
+            {pixelStats.whiteBalanceGain.map(g => g.toFixed(2)).join(' / ')}
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-muted-foreground">Crunch Score (FFT)</span>
+          <span className="font-mono-custom" style={{
+            color: pixelStats.crunchScore > 60 ? 'hsl(142 70% 45%)' : pixelStats.crunchScore > 35 ? 'hsl(42 95% 52%)' : 'hsl(0 75% 55%)'
+          }}>
+            {pixelStats.crunchScore}/100
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-muted-foreground">MRI Acrylamide</span>
+          <span className="font-mono-custom" style={{
+            color: pixelStats.maillardRisk === 'Low' ? 'hsl(142 70% 45%)' : pixelStats.maillardRisk === 'Moderate' ? 'hsl(42 95% 52%)' : 'hsl(0 75% 55%)'
+          }}>
+            {pixelStats.maillardRisk} ({result.acrylamideIndex}%)
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-muted-foreground">ΔE2000 vs Target</span>
+          <span className="font-mono-custom" style={{
+            color: pixelStats.deltaE2000 < 5 ? 'hsl(142 70% 45%)' : pixelStats.deltaE2000 < 15 ? 'hsl(42 95% 52%)' : 'hsl(0 75% 55%)'
+          }}>
+            {pixelStats.deltaE2000.toFixed(2)}
+          </span>
+        </div>
+      </div>
+
       {/* Analysis time */}
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span>Analysis time: <span className="font-mono-custom text-gold">{result.analysisTime}ms</span></span>

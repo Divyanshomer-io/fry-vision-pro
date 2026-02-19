@@ -2,7 +2,22 @@ import React from 'react';
 import { AlertTriangle, CheckCircle, XCircle, TrendingDown } from 'lucide-react';
 import type { AnalysisResult } from '@/lib/colorAnalysis';
 import { getScoreColor, getScoreBg } from '@/lib/pqiEngine';
-import { getMcdonaldsScoreLabel, getPQIStatus } from '@/lib/colorAnalysis';
+import { getPQIStatus } from '@/lib/colorAnalysis';
+
+function getMcdonaldsScoreLabel(score: number): string {
+  const labels: Record<number, string> = {
+    1: 'Not McDonald\'s Quality',
+    2: 'Very Different — Failure',
+    3: 'Moderately Different',
+    4: 'Slightly Different',
+    5: 'Equal to Target ✓',
+    6: 'Slightly Different',
+    7: 'Moderately Different',
+    8: 'Very Different — Failure',
+    9: 'Not McDonald\'s Quality',
+  };
+  return labels[score] ?? 'Unknown';
+}
 
 interface PQIScoringProps {
   result: AnalysisResult;
@@ -188,12 +203,33 @@ export function PQIScoring({ result }: PQIScoringProps) {
         />
       </div>
 
+      {/* V2 metrics */}
+      <div className="grid grid-cols-2 gap-2 mt-1">
+        <div className="rounded px-2 py-1.5 text-xs" style={{ background: 'hsl(220 15% 9%)', border: '1px solid hsl(220 15% 16%)' }}>
+          <div className="text-muted-foreground">ΔE2000 vs Gold</div>
+          <div className="font-mono-custom text-gold">{result.pixelStats.deltaE2000.toFixed(2)}</div>
+        </div>
+        <div className="rounded px-2 py-1.5 text-xs" style={{ background: 'hsl(220 15% 9%)', border: '1px solid hsl(220 15% 16%)' }}>
+          <div className="text-muted-foreground">Fuzzy Confidence</div>
+          <div className="font-mono-custom text-gold">{(result.pixelStats.fuzzyConfidence * 100).toFixed(0)}%</div>
+        </div>
+        <div className="rounded px-2 py-1.5 text-xs" style={{ background: 'hsl(220 15% 9%)', border: '1px solid hsl(220 15% 16%)' }}>
+          <div className="text-muted-foreground">Acrylamide Risk</div>
+          <div className="font-mono-custom" style={{ color: result.pixelStats.maillardRisk === 'Low' ? 'hsl(142 70% 45%)' : result.pixelStats.maillardRisk === 'Moderate' ? 'hsl(42 95% 52%)' : 'hsl(0 75% 55%)' }}>
+            {result.pixelStats.maillardRisk}
+          </div>
+        </div>
+        <div className="rounded px-2 py-1.5 text-xs" style={{ background: 'hsl(220 15% 9%)', border: '1px solid hsl(220 15% 16%)' }}>
+          <div className="text-muted-foreground">Crunch Score</div>
+          <div className="font-mono-custom text-gold">{result.pixelStats.crunchScore}/100</div>
+        </div>
+      </div>
+
       {/* PQI Formula note */}
       <div className="rounded-lg px-3 py-2 text-xs text-muted-foreground"
         style={{ background: 'hsl(220 15% 9%)', border: '1px solid hsl(220 15% 16%)' }}>
-        <span className="text-gold font-mono-custom">PQI = </span>
-        Base% + (No. of 5s ÷ (n−1)) × 10% &nbsp;|&nbsp;
-        Failure → 25% &nbsp;|&nbsp; Rejection → 0%
+        <span className="text-gold font-mono-custom">V2 Fuzzy Logic PQI</span> — Attribute interactions compound exponentially.
+        Failure → 25% | Rejection → 0%
       </div>
     </div>
   );
