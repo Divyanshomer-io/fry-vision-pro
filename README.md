@@ -18,8 +18,6 @@ An industrial-grade, browser-based computer vision suite designed to analyze the
 - **Calibration:** PPM (Pixels Per Millimeter) Spatial Engine
 - **Build Tool:** Vite
 
-> [!IMPORTANT]  
-> **No Backend Required:** All image processing, color space conversions ($RGB \rightarrow HSV \rightarrow CIE Lab$), and defect detection algorithms are implemented in pure TypeScript and run locally in the browser.
 
 ---
 
